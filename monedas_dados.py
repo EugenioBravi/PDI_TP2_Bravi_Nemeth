@@ -24,12 +24,11 @@ def clasificar_monedas_y_dados(imagen):
     imagen_rgb = cv2.cvtColor(imagen, cv2.COLOR_BGR2RGB)
     # Convertimos la imagen a escala de grises para la detección de círculos
     imagen_gris = cv2.cvtColor(imagen, cv2.COLOR_BGR2GRAY)
-
     # Clasificación de monedas
     contador_monedas = {'monedas_10_centavos': 0, 'monedas_50_centavos': 0, 'monedas_1_peso': 0}
     
     # Detectamos círculos (monedas) usando la Transformada de Hough
-    monedas_detectadas = cv2.HoughCircles(imagen_gris, cv2.HOUGH_GRADIENT, 1.4, minDist=100, param1=90, param2=190, minRadius=100, maxRadius=200)
+    monedas_detectadas = cv2.HoughCircles(imagen_gris, cv2.HOUGH_GRADIENT, dp=1.4, minDist=100, param1=90, param2=190, minRadius=100, maxRadius=200)
     monedas_detectadas = np.uint16(np.around(monedas_detectadas))
 
     # Procesamos cada moneda detectada
